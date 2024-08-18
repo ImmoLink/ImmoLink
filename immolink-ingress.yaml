@@ -4,7 +4,13 @@ metadata:
   name: ingress-srv
   annotations:
     kubernetes.io/ingress.class: public
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:
+  tls:
+  - hosts:
+    - immolink.ir
+    secretName: immolink
   rules:
   - host: immolink.ir
     http:
