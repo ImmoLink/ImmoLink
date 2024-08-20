@@ -3,6 +3,9 @@
 
 name: Release
 
+permissions:
+  contents: write  # Allows pushing commits and tags
+  
 on:
   pull_request:
     branches: [ "main" ]
