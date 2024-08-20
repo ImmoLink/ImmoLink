@@ -1,0 +1,48 @@
+# This workflow will build a golang project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-go
+
+name: Release
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  release:
+    name: Release
+    environment: Prod
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.22.1'
+
+    - name: Read version
+      id: get_version
+      run: |
+        VERSION=$(cat VERSION)
+        echo "::set-output name=version::$VERSION"
+
+    - name: Create git tag
+      run: |
+        git tag -a v${{ steps.get_version.outputs.version }} -m "Release version ${{ steps.get_version.outputs.version }}"
+        git push origin v${{ steps.get_version.outputs.version }}
+
+    - name: Build Docker image
+      run: |
+        docker build -t goldenhand/immolink:${{ steps.get_version.outputs.version }} .
+        echo "${{ secrets.DOCKERHUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+      
+    - name: Push Docker image
+      run: docker push goldenhand/immolink:${{ steps.get_version.outputs.version }}
+
+    - name: Build Latest 
+      run: docker tag goldenhand/immolink:${{ steps.get_version.outputs.version }} goldenhand/immolink:latest
+
+    - name: Push Latest
+      run: docker push goldenhand/immolink:latest
