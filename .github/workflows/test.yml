@@ -11,7 +11,7 @@ jobs:
 
   test:
     name: Test
-    environment: Development
+    environment: Dev
     runs-on: ubuntu-latest
     
     services: 
