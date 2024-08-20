@@ -24,3 +24,12 @@ format:
 	
 server :
 	go run main.go
+
+build :
+	docker build -t goldenhand/immolink:latest .
+
+push :
+	docker push goldenhand/immolink:latest
+	
+container :
+	docker run --network="host" --name immolink goldenhand/immolink:latest
