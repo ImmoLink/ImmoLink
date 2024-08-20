@@ -17,7 +17,7 @@ COPY entrypoint.sh .
 RUN sed -i 's/\r$//g' /app/entrypoint.sh # Delete unnecessery characters [\r$]
 RUN chmod +x /app/entrypoint.sh
 
-COPY env/* .
+# COPY env/* .
 COPY db/migration ./migration
 
 EXPOSE 8080
