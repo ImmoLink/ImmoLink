@@ -1,5 +1,7 @@
 # ImmoLink
 
+![Auto Assign](https://github.com/ImmoLink/immolink/actions/workflows/auto-assign.yml/badge.svg)
+
 ## Step 1 : Gin
 Install gin framework and make the first ping-pong app 
 
