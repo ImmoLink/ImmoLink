@@ -10,5 +10,10 @@ func (server *Server) ping(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, gin.H{
 		"message": "pong",
 	})
-	return
+}
+
+func (server *Server) me(ctx *gin.Context) {
+	ctx.JSON(http.StatusOK, gin.H{
+		"message": "me",
+	})
 }
