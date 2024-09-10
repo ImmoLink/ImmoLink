@@ -23,5 +23,6 @@ go.work.sum
 
 # env file
 .env
-
-immolink-tls.yaml
+/cert
+/env
+/K8S
