@@ -16,6 +16,7 @@ func NewServer(store *db.Store) *Server {
 	router := gin.Default()
 
 	router.GET("/api/ping", server.ping)
+	router.GET("/", server.me)
 
 	server.router = router
 	return server
